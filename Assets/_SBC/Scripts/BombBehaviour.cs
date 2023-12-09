@@ -36,6 +36,7 @@ using UnityEngine;
 //    public List<SpriteRenderer> RightSRs = new List<SpriteRenderer>();
 //}
 
+[System.Serializable]
 public class BombBehaviour : MonoBehaviour
 {
     ICharacterState _charState;
@@ -46,9 +47,12 @@ public class BombBehaviour : MonoBehaviour
     private float _timeToExploded = 2.0f;
     private float _currentTime = 0.0f;
     private bool _doneInit = false;
+    private ChainSourceFlag _chainSourceFlag = ChainSourceFlag.None; // direction of the chain's source (if any)
 
     public void Init(Vector2 original, ref ICharacterState characterState)
     {
+        WorldObject.Instance.AddBomb(this);
+
         //Lets create all 4 directions
         var up = new List<Vector2> { original + Vector2.up };
         var down = new List<Vector2> { original + Vector2.down };
@@ -62,6 +66,12 @@ public class BombBehaviour : MonoBehaviour
         _doneInit = true;
     }
 
+    public void ChainExplode(ChainSourceFlag chainSourceFlag)
+    {
+        _chainSourceFlag = chainSourceFlag;
+        _currentTime = _timeToExploded * 0.95f; //is a delay for chain activation (respecting how original works)
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,8 +82,9 @@ public class BombBehaviour : MonoBehaviour
         {
             var explosion = Instantiate(_bombExplosionPrefab);
             explosion.transform.position = transform.position;
-            explosion.Init((int)_explosionPwr);
+            explosion.Init((int)_explosionPwr, _chainSourceFlag);
             _charState.BombCount++;
+            WorldObject.Instance.RemoveBomb(this);
             Destroy(gameObject);
         }
     }

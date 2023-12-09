@@ -11,7 +11,8 @@ public class ExplodeEvent : MonoBehaviour
 
     public void Init(Action callback)
     {
-        _cacheCallback = callback;
+        if(callback != null)
+            _cacheCallback = callback;
         _ready = true;
     }
 

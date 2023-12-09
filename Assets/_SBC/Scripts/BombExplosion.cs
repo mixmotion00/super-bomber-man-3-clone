@@ -15,6 +15,15 @@ public enum ExplosionSpriteFlag
     RightEnd
 }
 
+public enum ChainSourceFlag
+{
+    None,
+    FromTop,
+    FromBottom,
+    FromLeft,
+    FromRight
+}
+
 public class SpriteCache
 {
     public SpriteRenderer Sr;
@@ -45,14 +54,16 @@ public class BombExplosion : MonoBehaviour
 
     [SerializeField] private bool _doneInit = false;
 
-    public void Init(int power = 1)
+    public void Init(int power, ChainSourceFlag chainSourceFlag)
     {
+        if (power <= 0) power = 1; //min 1
+
         _topSpread = power;
         _bottomSpread = power;
         _leftSpread = power;
         _rightSpread = power;
 
-        CreateExplosionSpread();
+        CreateExplosionSpread(chainSourceFlag);
         _doneInit = true;
     }
 
@@ -75,7 +86,7 @@ public class BombExplosion : MonoBehaviour
     }
 
     [ContextMenu("CreateExplosionSpread")]
-    private void CreateExplosionSpread()
+    private void CreateExplosionSpread(ChainSourceFlag chainSourceFlag)
     {
         Vector2 origin = transform.position;
 
@@ -88,8 +99,18 @@ public class BombExplosion : MonoBehaviour
         {
             if (collided) continue;
 
+            if (chainSourceFlag == ChainSourceFlag.FromBottom) continue;
+
             //check if any collider
             Vector2Int spreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y) + Vector2Int.up;
+            if (WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero))
+            {
+                Debug.Log($"Collided bomb to the top");
+                collided = true;
+                //Activate chain explosion
+                WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromTop);
+            }
+
             if (WorldObject.Instance.OnCollided(spreadPosInt))
             {
                 Debug.Log($"Collided top: {spreadPosInt}");
@@ -115,7 +136,15 @@ public class BombExplosion : MonoBehaviour
         {
             if (collided) continue;
 
+            if (chainSourceFlag == ChainSourceFlag.FromTop) continue;
+
             Vector2Int spreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y) + Vector2Int.down;
+            if (WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero))
+            {
+                Debug.Log($"Collided bomb to the down");
+                collided = true;
+                WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromBottom);
+            }
             if (WorldObject.Instance.OnCollided(spreadPosInt))
             {
                 Debug.Log($"Collided down: {spreadPosInt}");
@@ -141,7 +170,15 @@ public class BombExplosion : MonoBehaviour
         {
             if (collided) continue;
 
+            if (chainSourceFlag == ChainSourceFlag.FromRight) continue;
+
             Vector2Int spreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y) + Vector2Int.left;
+            if (WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero))
+            {
+                Debug.Log($"Collided bomb to the left");
+                collided = true;
+                WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromLeft);
+            }
             if (WorldObject.Instance.OnCollided(spreadPosInt))
             {
                 Debug.Log($"Collided left: {spreadPosInt}");
@@ -167,7 +204,15 @@ public class BombExplosion : MonoBehaviour
         {
             if (collided) continue;
 
+            if (chainSourceFlag == ChainSourceFlag.FromLeft) continue;
+
             Vector2Int spreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y) + Vector2Int.right;
+            if (WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero))
+            {
+                Debug.Log($"Collided bomb to the right");
+                collided = true;
+                WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromRight);
+            }
             if (WorldObject.Instance.OnCollided(spreadPosInt))
             {
                 Debug.Log($"Collided right: {spreadPosInt}");

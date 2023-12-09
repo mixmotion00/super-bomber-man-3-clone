@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.WSA;
+using static UnityEditor.PlayerSettings;
 using static UnityEditor.Progress;
 
 public class DestructableTile
@@ -11,6 +13,11 @@ public class DestructableTile
     public Vector2 TilePos;
     public Vector2 WorldTilePos;
     public Vector2Int TilePosVInt; //for tilemap reference
+}
+
+public class DestructableRewardItem : DestructableTile
+{
+    public RewardItem CacheRewardItem;
 }
 
 public class WorldObject : MonoBehaviour
@@ -24,6 +31,10 @@ public class WorldObject : MonoBehaviour
     [SerializeField] private ExplodeEvent _explodeEventPrefab;
     [SerializeField] private RewardItem _rewardItemPrefab;
     private List<DestructableTile> _destructableTiles = new List<DestructableTile>();
+    private List<DestructableRewardItem> _destructableRewardItem = new List<DestructableRewardItem>();
+    private List<BombBehaviour> _cacheBombs = new List<BombBehaviour>();
+
+    public List<BombBehaviour> CacheBombs { get { return _cacheBombs; } }
 
     public bool OnCollided(Vector2Int pos)
     {
@@ -34,13 +45,70 @@ public class WorldObject : MonoBehaviour
 
         if(destructableTile != null)
         {
-            Debug.Log($"Destructable found!, {destructableTile.TilePos}");
             OnDestroyDestructable(destructableTile);
         }
 
-        //Debug.Log($"{pos},{tile}");
+        var desctructableReward = _destructableRewardItem.
+            FirstOrDefault(f =>
+            f.WorldTilePos.x == pos.x &&
+            f.WorldTilePos.y == pos.y);
+
+        if(desctructableReward != null)
+        {
+            Destroy(desctructableReward.CacheRewardItem.gameObject);
+            RemoveRewardItem(desctructableReward.CacheRewardItem, true);
+        }
 
         return anyTile;
+    }
+
+    public BombBehaviour OnCollidedBomb(Vector2Int pos, Vector2 checkingOnDirection)
+    {
+        //check any other bomb at the side exist
+        if (_cacheBombs.Count > 1)
+        {
+            return GetBomb(pos, checkingOnDirection);
+        }
+
+        return null;
+    }
+
+    public void AddBomb(BombBehaviour bomb) { _cacheBombs.Add(bomb); }
+    public void RemoveBomb(BombBehaviour bomb) { _cacheBombs.RemoveAll(b => b.GetInstanceID() == bomb.GetInstanceID()); }
+    private BombBehaviour GetBomb(Vector2Int pos, Vector2 direction)
+    {
+        var sidePos = pos + direction;
+
+        var getBomb = _cacheBombs.SingleOrDefault(bomb =>
+            bomb.transform.position.x == sidePos.x && bomb.transform.position.y == sidePos.y);
+
+        //Debug.Log($"dir:{direction}, {sidePos}");
+
+        return getBomb;
+    }
+
+    public void AddRewardItem(RewardItem reward)
+    {
+        //create cache
+        var desReward = new DestructableRewardItem();
+        desReward.CacheRewardItem = reward;
+        var newT = new Vector2(
+            desReward.CacheRewardItem.transform.position.x - 0.5f,
+            desReward.CacheRewardItem.transform.position.y + 0.5f);
+        desReward.WorldTilePos = newT;
+
+        _destructableRewardItem.Add(desReward);
+    }
+
+    public void RemoveRewardItem(RewardItem reward, bool spawnEffect = false)
+    {
+        if (spawnEffect)
+        {
+            var explode = SpawnExplodeEvent(reward.transform.position);
+            explode.Init(null);
+        }
+
+        _destructableRewardItem.RemoveAll(r => r.CacheRewardItem.GetInstanceID() == reward.GetInstanceID());
     }
 
     private void Awake()
@@ -58,8 +126,10 @@ public class WorldObject : MonoBehaviour
         var tileObj = _destructableTM.GetTile((Vector3Int)tile.TilePosVInt);
         if(tileObj != null)
         {
-            var explodeEvent = Instantiate(_explodeEventPrefab);
-            explodeEvent.transform.position = tile.WorldTilePos;
+            //var explodeEvent = Instantiate(_explodeEventPrefab);
+            //explodeEvent.transform.position = tile.WorldTilePos;
+
+            var explodeEvent = SpawnExplodeEvent(tile.WorldTilePos);
 
             var randomItem = Random.Range(0, 2);
             if(randomItem == 0)
@@ -79,6 +149,14 @@ public class WorldObject : MonoBehaviour
             _allTileBounds.RemoveAll(t => t.x == tile.TilePosVInt.x && t.y == tile.TilePosVInt.y + 1);
             Destroy(tile.SR.gameObject);
         }
+    }
+
+    private ExplodeEvent SpawnExplodeEvent(Vector2 spawnPos)
+    {
+        var explodeEvent = Instantiate(_explodeEventPrefab);
+        explodeEvent.transform.position = spawnPos;
+
+        return explodeEvent;
     }
 
     private void SpawnRewardItem(RewardType rewardItemType, Vector2 spawnPos)
@@ -101,7 +179,7 @@ public class WorldObject : MonoBehaviour
 
         for (int i = 0; i < destructable.Count; i++)
         {
-            //add 1 because for unity's tilemap weird tile pos
+            //add 1 because of unity's tilemap way of tiling positioning
             var vector2Int = new Vector2Int(destructable[i].x, destructable[i].y);
             destructable[i] = new Vector2Int(destructable[i].x, destructable[i].y + 1);
 
@@ -115,7 +193,8 @@ public class WorldObject : MonoBehaviour
             desTile.TilePos = sr.transform.position;
             var newT = new Vector2(sr.transform.position.x + 0.5f, sr.transform.position.y - 0.5f);
             sr.transform.position = newT;
-            sr.color = new Color(0, 1, 0, 0.25f);
+            //sr.color = new Color(0, 1, 0, 0.25f); //enable this to check debug box
+            sr.color = new Color(0, 1, 0, 0f); //hide the debug box
             desTile.WorldTilePos = newT;
             _destructableTiles.Add(desTile);
         }

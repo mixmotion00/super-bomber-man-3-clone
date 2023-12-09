@@ -29,6 +29,8 @@ public class RewardItem : MonoBehaviour
         }
 
         _rewardType = rewardType;
+
+        WorldObject.Instance.AddRewardItem(this);
     }
 
     public void OnInteracted(ICharacterState charState)
@@ -44,6 +46,8 @@ public class RewardItem : MonoBehaviour
             default:
                 break;
         }
+
+        WorldObject.Instance.RemoveRewardItem(this, false);
 
         Destroy(gameObject);
     }
