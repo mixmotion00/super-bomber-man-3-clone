@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1111050714661404602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1111050714661404605}
+  - component: {fileID: 1111050714661404604}
+  m_Layer: 0
+  m_Name: BombExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1111050714661404605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111050714661404602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1111050714661404604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111050714661404602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c37a88ce68ae8459cb9b6af154c14a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _topSpread: 5
+  _bottomSpread: 5
+  _leftSpread: 5
+  _rightSpread: 5
+  _srPrefab: {fileID: 5371370083294652497, guid: e06ca45efa2c747c0b6acae1f9d8a4d6, type: 3}
+  _explosionSprites:
+  - {fileID: 11400000, guid: af3ab330d3db14f88bf47b5592c27374, type: 2}
+  - {fileID: 11400000, guid: b669d0d3216974918b4ade14296a3d38, type: 2}
+  - {fileID: 11400000, guid: b0de2e915f65f4eb1ac62134168a242a, type: 2}
+  - {fileID: 11400000, guid: 938beab6e8ff14bbb90f184cb9bed9e5, type: 2}
+  _doneInit: 0

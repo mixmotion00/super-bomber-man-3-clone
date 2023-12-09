@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e90dcdfa90e8424489b9f22581e8e0b, type: 3}
+  m_Name: ExplosionSprite1
+  m_EditorClassIdentifier: 
+  _base: {fileID: -755429176, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _upMid: {fileID: 539503415, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _upEnd: {fileID: 869150924, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _downMid: {fileID: -626911424, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _downEnd: {fileID: 1460067097, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _rightMid: {fileID: -364225457, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _rightEnd: {fileID: -621560545, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _leftMid: {fileID: 453323805, guid: 000134608e27348abafe95b771d5aec9, type: 3}
+  _leftEnd: {fileID: 975784979, guid: 000134608e27348abafe95b771d5aec9, type: 3}
