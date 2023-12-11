@@ -318,7 +318,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_9
+      name: enemy_dead_1
       rect:
         serializedVersion: 2
         x: 213
@@ -339,7 +339,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_10
+      name: enemy_dead_2
       rect:
         serializedVersion: 2
         x: 233
@@ -360,7 +360,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_11
+      name: enemy_dead_3
       rect:
         serializedVersion: 2
         x: 252
@@ -381,7 +381,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_12
+      name: enemy_dead_4
       rect:
         serializedVersion: 2
         x: 269
@@ -402,13 +402,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_13
+      name: enemy_dead_5
       rect:
         serializedVersion: 2
         x: 284
-        y: 233
+        y: 228
         width: 8
-        height: 8
+        height: 13
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -423,13 +423,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_14
+      name: enemy_dead_6
       rect:
         serializedVersion: 2
         x: 298
-        y: 234
+        y: 228
         width: 6
-        height: 6
+        height: 12
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -460,48 +460,6 @@ TextureImporter:
       bones: []
       spriteID: 1393c329234b9409db696f6b5388874e
       internalID: -298343021
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 57617_16
-      rect:
-        serializedVersion: 2
-        x: 284
-        y: 228
-        width: 8
-        height: 4
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f3cc341cbb92476f98230b57b2696da
-      internalID: 543080952
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 57617_17
-      rect:
-        serializedVersion: 2
-        x: 298
-        y: 228
-        width: 6
-        height: 4
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 985018dbb02094c6297b376c39fb0190
-      internalID: 1086111991
       vertices: []
       indices: 
       edges: []
@@ -591,7 +549,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_22
+      name: enemy_frog_walk_front_1
       rect:
         serializedVersion: 2
         x: 117
@@ -612,7 +570,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_23
+      name: enemy_frog_walk_front_2
       rect:
         serializedVersion: 2
         x: 136
@@ -633,7 +591,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_24
+      name: enemy_frog_walk_front_3
       rect:
         serializedVersion: 2
         x: 155
@@ -654,7 +612,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_25
+      name: enemy_frog_walk_front_4
       rect:
         serializedVersion: 2
         x: 174
@@ -738,7 +696,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_29
+      name: enemy_frog_walk_back_1
       rect:
         serializedVersion: 2
         x: 117
@@ -759,7 +717,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_30
+      name: enemy_frog_walk_back_2
       rect:
         serializedVersion: 2
         x: 136
@@ -780,7 +738,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_31
+      name: enemy_frog_walk_back_3
       rect:
         serializedVersion: 2
         x: 155
@@ -801,7 +759,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_32
+      name: enemy_frog_walk_back_4
       rect:
         serializedVersion: 2
         x: 174
@@ -822,7 +780,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_33
+      name: enemy_frog_dead
       rect:
         serializedVersion: 2
         x: 196
@@ -885,7 +843,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_36
+      name: enemy_frog_walk_side_1
       rect:
         serializedVersion: 2
         x: 126
@@ -906,7 +864,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_37
+      name: enemy_frog_walk_side_2
       rect:
         serializedVersion: 2
         x: 146
@@ -927,7 +885,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_38
+      name: enemy_frog_walk_side_3
       rect:
         serializedVersion: 2
         x: 165
@@ -1011,7 +969,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_42
+      name: enemy_rock_standing_1
       rect:
         serializedVersion: 2
         x: 118
@@ -1032,7 +990,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_43
+      name: enemy_rock_standing_2
       rect:
         serializedVersion: 2
         x: 137
@@ -1053,7 +1011,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_44
+      name: enemy_rock_standing_3
       rect:
         serializedVersion: 2
         x: 156
@@ -1074,7 +1032,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_45
+      name: enemy_rock_standing_4
       rect:
         serializedVersion: 2
         x: 175
@@ -1095,10 +1053,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_46
+      name: enemy_rock_standing_5
       rect:
         serializedVersion: 2
-        x: 194
+        x: 195
         y: 98
         width: 16
         height: 24
@@ -1200,7 +1158,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_51
+      name: enemy_rock_walkFront_1
       rect:
         serializedVersion: 2
         x: 122
@@ -1221,7 +1179,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_52
+      name: enemy_rock_walkFront_2
       rect:
         serializedVersion: 2
         x: 141
@@ -1242,7 +1200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_53
+      name: enemy_rock_walkFront_3
       rect:
         serializedVersion: 2
         x: 160
@@ -1368,7 +1326,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_59
+      name: enemy_rock_walkSide_1
       rect:
         serializedVersion: 2
         x: 122
@@ -1389,7 +1347,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_60
+      name: enemy_rock_walkSide_2
       rect:
         serializedVersion: 2
         x: 141
@@ -1410,7 +1368,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_61
+      name: enemy_rock_walkSide_3
       rect:
         serializedVersion: 2
         x: 160
@@ -1431,7 +1389,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_62
+      name: enemy_rock_dead_1
       rect:
         serializedVersion: 2
         x: 188
@@ -1578,7 +1536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_69
+      name: enemy_rock_walkBack_1
       rect:
         serializedVersion: 2
         x: 123
@@ -1599,7 +1557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_70
+      name: enemy_rock_walkBack_2
       rect:
         serializedVersion: 2
         x: 142
@@ -1620,7 +1578,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 57617_71
+      name: enemy_rock_walkBack_3
       rect:
         serializedVersion: 2
         x: 161
@@ -1653,11 +1611,6 @@ TextureImporter:
     nameFileIdTable:
       57617_0: -139764804
       57617_1: -1471279743
-      57617_10: 875639496
-      57617_11: -397602492
-      57617_12: 442125220
-      57617_13: 110140301
-      57617_14: -2144554286
       57617_15: -298343021
       57617_16: 543080952
       57617_17: 1086111991
@@ -1666,63 +1619,68 @@ TextureImporter:
       57617_2: -2092494023
       57617_20: 177430990
       57617_21: 981290898
-      57617_22: -1594549689
-      57617_23: -1303991643
-      57617_24: 1936737941
-      57617_25: -696898740
       57617_26: 641961952
       57617_27: 826512337
       57617_28: 664819416
-      57617_29: -201012618
       57617_3: -1686406452
-      57617_30: 745695009
-      57617_31: 1275549998
-      57617_32: -1904235692
-      57617_33: 384950967
       57617_34: -1844063938
       57617_35: 1509214516
-      57617_36: -912663826
-      57617_37: 1035777834
-      57617_38: 1841744623
       57617_39: 848867077
       57617_4: -291090622
       57617_40: 286427142
       57617_41: -226355087
-      57617_42: 743236857
-      57617_43: 1014566166
-      57617_44: 1615527761
-      57617_45: 1897272353
-      57617_46: -129016484
       57617_47: -1473452957
       57617_48: 33637500
       57617_49: 1465777042
       57617_5: 357701915
       57617_50: 486728848
-      57617_51: 1556064511
-      57617_52: 645784983
-      57617_53: 1253038537
       57617_54: 589179291
       57617_55: -1052858809
       57617_56: 89071715
       57617_57: 158006732
       57617_58: -2033940656
-      57617_59: -473362807
       57617_6: 95006685
-      57617_60: -285399303
-      57617_61: 930724600
-      57617_62: 703951810
       57617_63: -1944588279
       57617_64: -1314954123
       57617_65: -1097450174
       57617_66: -202826051
       57617_67: 267671246
       57617_68: 2006352016
-      57617_69: -1093091225
       57617_7: -1470488034
-      57617_70: -342334702
-      57617_71: 1053823787
       57617_8: -759553240
-      57617_9: -1430562405
+      enemy_dead_1: -1430562405
+      enemy_dead_2: 875639496
+      enemy_dead_3: -397602492
+      enemy_dead_4: 442125220
+      enemy_dead_5: 110140301
+      enemy_dead_6: -2144554286
+      enemy_frog_dead: 384950967
+      enemy_frog_walk_back_1: -201012618
+      enemy_frog_walk_back_2: 745695009
+      enemy_frog_walk_back_3: 1275549998
+      enemy_frog_walk_back_4: -1904235692
+      enemy_frog_walk_front_1: -1594549689
+      enemy_frog_walk_front_2: -1303991643
+      enemy_frog_walk_front_3: 1936737941
+      enemy_frog_walk_front_4: -696898740
+      enemy_frog_walk_side_1: -912663826
+      enemy_frog_walk_side_2: 1035777834
+      enemy_frog_walk_side_3: 1841744623
+      enemy_rock_dead_1: 703951810
+      enemy_rock_standing_1: 743236857
+      enemy_rock_standing_2: 1014566166
+      enemy_rock_standing_3: 1615527761
+      enemy_rock_standing_4: 1897272353
+      enemy_rock_standing_5: -129016484
+      enemy_rock_walkBack_1: -1093091225
+      enemy_rock_walkBack_2: -342334702
+      enemy_rock_walkBack_3: 1053823787
+      enemy_rock_walkFront_1: 1556064511
+      enemy_rock_walkFront_2: 645784983
+      enemy_rock_walkFront_3: 1253038537
+      enemy_rock_walkSide_1: -473362807
+      enemy_rock_walkSide_2: -285399303
+      enemy_rock_walkSide_3: 930724600
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

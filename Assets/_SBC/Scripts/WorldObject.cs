@@ -34,6 +34,7 @@ public class WorldObject : MonoBehaviour
     private List<DestructableRewardItem> _destructableRewardItem = new List<DestructableRewardItem>();
     private List<BombBehaviour> _cacheBombs = new List<BombBehaviour>();
 
+    public List<Vector2Int> AllTileBounds { get { return _allTileBounds; } }
     public List<BombBehaviour> CacheBombs { get { return _cacheBombs; } }
 
     public bool OnCollided(Vector2Int pos)
