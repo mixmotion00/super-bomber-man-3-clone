@@ -228,7 +228,7 @@ public class WorldObject : MonoBehaviour
             if (tilemap.HasTile(pos))
             {
                 tilesPos.Add((Vector2Int)pos);
-                Debug.Log($"Pos:{pos.x},{pos.y}");
+                //Debug.Log($"Pos:{pos.x},{pos.y}");
             }
         }
 
