@@ -2,40 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class ExplosionArea
-//{
-//    private Vector2 _baseArea = Vector2.zero;
-//    private List<Vector2> _upperArea = new List<Vector2>();
-//    private List<Vector2> _bottomArea = new List<Vector2>();
-//    private List<Vector2> _leftArea = new List<Vector2>();
-//    private List<Vector2> _rightArea = new List<Vector2>();
-
-//    public Vector2 BaseArea { get => _baseArea; }
-//    public List<Vector2> UpperArea { get => _upperArea; }
-//    public List<Vector2> BottomArea { get => _bottomArea; }
-//    public List<Vector2> LeftArea { get => _leftArea; }
-//    public List<Vector2> RightArea { get => _rightArea; }
-
-//    public ExplosionArea(Vector2 baseArea, List<Vector2> upperArea, List<Vector2> bottomArea, List<Vector2> leftArea, List<Vector2> rightArea)
-//    {
-//        _baseArea = baseArea;
-//        _upperArea = upperArea;
-//        _bottomArea = bottomArea;
-//        _leftArea = leftArea;
-//        _rightArea = rightArea;
-//    }
-//}
-
-//[System.Serializable]
-//public class ExplosionSRs
-//{
-//    public SpriteRenderer BaseSR;
-//    public List<SpriteRenderer> UpSRs = new List<SpriteRenderer>();
-//    public List<SpriteRenderer> DownSRs = new List<SpriteRenderer>();
-//    public List<SpriteRenderer> LeftSRs = new List<SpriteRenderer>();
-//    public List<SpriteRenderer> RightSRs = new List<SpriteRenderer>();
-//}
-
 [System.Serializable]
 public class BombBehaviour : MonoBehaviour
 {

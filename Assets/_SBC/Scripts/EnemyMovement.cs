@@ -6,45 +6,29 @@ using UnityEngine.UIElements;
 
 public class EnemyMovement : MonoBehaviour
 {
-    private Rigidbody2D _rb;
-    private Vector2Int _collidedUp, _collidedDown, _collidedLeft, _collidedRight;
-    private bool _readyNextCol = false;
-    private Vector2 _moveDir = Vector2.right;
+    // Enemy state
+    private Vector2 _moveDir = Vector2.up;
     private Vector2 _nextMoveTile = Vector2.zero;
     private float _moveSpeed = 2;
-    [SerializeField] private SpriteRenderer _srDebug;
-    [SerializeField] private Transform _debugContainer;
 
+    // Cast grid adjustment
     private Vector2Int upAdj = new Vector2Int(0, 1);
     private Vector2Int downAdj = new Vector2Int(0, -1);
     private Vector2Int leftAdj = new Vector2Int(-1, 0);
     private Vector2Int rightAdj = new Vector2Int(1, 0);
 
-    [SerializeField] private bool start = false;
-    //[SerializeField] private bool continueMove = true;
+    // References
+    [SerializeField] private SpriteRenderer _srDebug;
+    [SerializeField] private Transform _debugContainer;
 
     private void Start()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _nextMoveTile = VecCurrentPos() + new Vector2(1, 0);
+        _nextMoveTile = VecCurrentPos() + _moveDir;
     }
 
     private void Update()
     {
-        //var anyDir = RandomDirOnCollided(out Vector2 randDir);
-
-        //if (anyDir)
-        //{
-        //    Debug.Log($"Update() randomdir={randDir}");
-        //    _moveDir = randDir;
-        //}
-        if (!start) return;
         MovePerTile();
-    }
-
-    private void FixedUpdate()
-    {
-        //_rb.velocity = _moveDir * _moveSpeed * Time.fixedDeltaTime;
     }
 
     private void MovePerTile()
@@ -55,28 +39,28 @@ public class EnemyMovement : MonoBehaviour
         }
         else
         {
+            // Finished moving to next tile
+
             ResetDebugCollider();
 
-            Debug.Log($"Finished. {VecCurrentPos()}, {_nextMoveTile}");
+            //Debug.Log($"Finished. {VecCurrentPos()}, {_nextMoveTile}");
             // Check if can move move
+
+            // Debug
             DebugPos(VecCurrentPos(), upAdj.x, upAdj.y, Color.red);
             DebugPos(VecCurrentPos(), downAdj.x, downAdj.y, Color.yellow);
             DebugPos(VecCurrentPos(), leftAdj.x, leftAdj.y, Color.blue);
             DebugPos(VecCurrentPos(), rightAdj.x, rightAdj.y, Color.green);
 
-            Debug.Break();
+            bool needNewDir = RandomDirOnCollided(out Vector2 newMoveDir);
 
-            _nextMoveTile = VecCurrentPos() + Vector2Int.right;
+            if (needNewDir)
+                _moveDir = newMoveDir;
+
+            //Debug.Break();
+
+            _nextMoveTile = VecCurrentPos() + _moveDir;
         }
-
-        // Once finished move to next tile
-        // Check moveable dir
-        // Get next tile based on random dir
-    }
-
-    private void GetNextTile(Vector2Int dir)
-    {
-        _nextMoveTile = VecCurrentPos() + dir;
     }
 
     private bool RandomDirOnCollided(out Vector2 randDir)
@@ -116,39 +100,25 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (topCol)
                 {
-                    DebugPos(VecCurrentPos(), upAdj.x, upAdj.y, Color.red);
                     allowedDir.Remove(Vector2Int.up);
                 }
                 if (downCol)
                 {
-                    DebugPos(VecCurrentPos(), downAdj.x, downAdj.y, Color.yellow);
-
                     allowedDir.Remove(Vector2Int.down);
                 }
                 if (leftCol)
                 {
-                    DebugPos(VecCurrentPos(), leftAdj.x, leftAdj.y, Color.blue);
                     allowedDir.Remove(Vector2Int.left);
                 }
                 if (rightCol)
                 {
-                    DebugPos(VecCurrentPos(), rightAdj.x, rightAdj.y, Color.green);
                     allowedDir.Remove(Vector2Int.right);
                 }
 
-                //string debugStr = "";
-                //allowedDir.ForEach(a => debugStr += $"[{a}],");
-                //Debug.Log(debugStr);
                 var randPick = Random.Range(0, allowedDir.Count);
-                Debug.Log($"RandPick: {randPick}, Count:{allowedDir.Count}");
-                if(allowedDir.Count == 0)
-                {
-                    Debug.Log($"Something is wrong.");
-                    Debug.Break();
-                }
 
                 randDir = allowedDir[randPick];
-                Debug.Break();
+                //Debug.Break();
                 if (allowedDir.Any()) return true;
             }
         }
@@ -173,10 +143,6 @@ public class EnemyMovement : MonoBehaviour
                     allowedDir.Remove(Vector2Int.right);
                 }
 
-                string debugStr = "";
-                allowedDir.ForEach(a => debugStr += $"[{a}],");
-                Debug.Log(debugStr);
-
                 randDir = allowedDir[Random.Range(0, allowedDir.Count)];
                 if (allowedDir.Any()) return true;
             }
@@ -187,11 +153,6 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (downCol)
                 {
-                    roundPosVer = VecCurrentPos();
-                    roundPosVer.x += 1;
-                    roundPosVer.y -= 1;
-                    var checkDown = allTileBounds.FirstOrDefault(tile => roundPosVer == tile);
-                    Debug.Log($"Checkdown: {checkDown}");
                     allowedDir.Remove(Vector2Int.down);
                 }
                 if (topCol)
@@ -206,10 +167,6 @@ public class EnemyMovement : MonoBehaviour
                 {
                     allowedDir.Remove(Vector2Int.right);
                 }
-
-                string debugStr = "";
-                allowedDir.ForEach(a => debugStr += $"[{a}],");
-                Debug.Log(debugStr);
 
                 randDir = allowedDir[Random.Range(0, allowedDir.Count)];
                 if (allowedDir.Any()) return true;
@@ -221,29 +178,22 @@ public class EnemyMovement : MonoBehaviour
             {
                 if (topCol)
                 {
-                    DebugPos(VecCurrentPos(), upAdj.x, upAdj.y, Color.red);
                     allowedDir.Remove(Vector2Int.up);
                 }
                 if (downCol)
                 {
-                    DebugPos(VecCurrentPos(), downAdj.x, downAdj.y, Color.yellow);
                     allowedDir.Remove(Vector2Int.down);
                 }
                 if (leftCol)
                 {
-                    DebugPos(VecCurrentPos(), leftAdj.x, leftAdj.y, Color.blue);
                     allowedDir.Remove(Vector2Int.left);
                 }
                 if (rightCol)
                 {
-                    DebugPos(VecCurrentPos(), rightAdj.x, rightAdj.y, Color.green);
                     allowedDir.Remove(Vector2Int.right);
                 }
 
-                //string debugStr = "";
-                //allowedDir.ForEach(a => debugStr += $"[{a}],");
-                //Debug.Log(debugStr);
-                Debug.Break();
+                //Debug.Break();
                 randDir = allowedDir[Random.Range(0, allowedDir.Count)];
                 if (allowedDir.Any()) return true;
             }
@@ -285,7 +235,21 @@ public class EnemyMovement : MonoBehaviour
 
     private Vector2Int VecCurrentPos()
     {
-        var vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        var vecPos = Vector2.zero;
+        vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
+
+        // Error adjustment when moving left
+        if (_moveDir == Vector2.left)
+        {
+            //vecPos = new Vector2(Mathf.CeilToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+            vecPos.x = Mathf.CeilToInt(transform.position.x);
+        }
+        // Error adjustment when moving down
+        if(_moveDir == Vector2.down)
+        {
+            vecPos.y = Mathf.CeilToInt(transform.position.y);
+        }
+
         return new Vector2Int((int)vecPos.x, (int)vecPos.y);
     }
 }
