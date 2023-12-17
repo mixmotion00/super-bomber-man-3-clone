@@ -17,7 +17,7 @@ public class BombBehaviour : MonoBehaviour
 
     public void Init(Vector2 original, ref ICharacterState characterState)
     {
-        WorldObject.Instance.AddBomb(this);
+        //WorldObject.Instance.AddBomb(this);
 
         //Lets create all 4 directions
         var up = new List<Vector2> { original + Vector2.up };

@@ -21,6 +21,26 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private SpriteRenderer _srDebug;
     [SerializeField] private Transform _debugContainer;
 
+    // Properties
+    private List<Vector2Int> _allTilesBounds
+    {
+        // Enemy should also collided with bomb
+        get
+        {
+            if (!WorldObject.Instance) return new List<Vector2Int>();
+
+            var updatedBounds = new List<Vector2Int>();
+            var allBounds = WorldObject.Instance.AllTileBounds;
+            var cacheBombs = WorldObject.Instance.CacheBombs;
+
+            updatedBounds.AddRange(allBounds);
+            cacheBombs.ForEach(bomb =>
+            updatedBounds.Add(new Vector2Int((int)bomb.transform.position.x, (int)bomb.transform.position.y)));
+            
+            return updatedBounds;
+        }
+    }
+
     private void Start()
     {
         _nextMoveTile = VecCurrentPos() + _moveDir;
@@ -70,27 +90,27 @@ public class EnemyMovement : MonoBehaviour
         List<Vector2Int> allowedDir = new List<Vector2Int>
         {Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right };
 
-        var allTileBounds = WorldObject.Instance.AllTileBounds;
+        //var allTileBounds = WorldObject.Instance.AllTileBounds;
 
         var roundPosVer = VecCurrentPos();
         roundPosVer.x += upAdj.x;
         roundPosVer.y += upAdj.y;
-        var topCol = allTileBounds.Any(tile => roundPosVer == tile);
+        var topCol = _allTilesBounds.Any(tile => roundPosVer == tile);
 
         roundPosVer = VecCurrentPos();
         roundPosVer.x += downAdj.x;
         roundPosVer.y += downAdj.y;
-        var downCol = allTileBounds.Any(tile => (roundPosVer) == tile);
+        var downCol = _allTilesBounds.Any(tile => (roundPosVer) == tile);
 
         var roundPosHor = VecCurrentPos();
         roundPosHor.x += leftAdj.x;
         roundPosHor.y += leftAdj.y;
-        var leftCol = allTileBounds.Any(tile => roundPosHor == tile);
+        var leftCol = _allTilesBounds.Any(tile => roundPosHor == tile);
 
         roundPosHor = VecCurrentPos();
         roundPosHor.x += rightAdj.x;
         roundPosHor.y += rightAdj.y;
-        var rightCol = allTileBounds.Any(tile => tile == roundPosHor);// == tile);
+        var rightCol = _allTilesBounds.Any(tile => tile == roundPosHor);// == tile);
 
         randDir = Vector2.zero;
 
@@ -204,14 +224,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void DebugPos(Vector2Int checkPos, int xInc, int yInc, Color color)
     {
-        var allTileBounds = WorldObject.Instance.AllTileBounds;
+        //var allTileBounds = WorldObject.Instance.AllTileBounds;
 
         var newRoundPos = checkPos;
         newRoundPos.x += xInc;
         newRoundPos.y += yInc;
-        var check = allTileBounds.FirstOrDefault(tile => newRoundPos == tile);
+        var check = _allTilesBounds.FirstOrDefault(tile => newRoundPos == tile);
 
-        if (!allTileBounds.Any(tile => newRoundPos == tile)) // if no tile found, just don't display debug
+        if (!_allTilesBounds.Any(tile => newRoundPos == tile)) // if no tile found, just don't display debug
             return;
 
         DebugCollided(check, color);

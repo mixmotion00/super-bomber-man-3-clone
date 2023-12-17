@@ -41,6 +41,8 @@ public class CharacterBombing : MonoBehaviour, ICharacterBombing
         var bomb = Instantiate(_bombBehaviourPrefab);
         bomb.transform.position = vecPos;
         bomb.Init(vecPos, ref _charState);
+
+        WorldObject.Instance.AddBomb(bomb);
     }
 
     //public bool BombAlreadyExistHere(Vector2 pos)
