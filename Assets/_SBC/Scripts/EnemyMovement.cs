@@ -4,7 +4,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class EnemyMovement : MonoBehaviour
+public interface IEnemyMovement
+{
+    Vector2Int VecCurrentPos();
+}
+
+public class EnemyMovement : MonoBehaviour, IEnemyMovement
 {
     // Enemy state
     private Vector2 _moveDir = Vector2.up;
@@ -17,9 +22,12 @@ public class EnemyMovement : MonoBehaviour
     private Vector2Int leftAdj = new Vector2Int(-1, 0);
     private Vector2Int rightAdj = new Vector2Int(1, 0);
 
-    // References
+    // Manual References
     [SerializeField] private SpriteRenderer _srDebug;
     [SerializeField] private Transform _debugContainer;
+
+    // Auto References
+    private IEnemyBehaviour _enemyBehaviour;
 
     // Properties
     private List<Vector2Int> _allTilesBounds
@@ -41,8 +49,10 @@ public class EnemyMovement : MonoBehaviour
         }
     }
 
+    // Mono
     private void Start()
     {
+        _enemyBehaviour = GetComponent<IEnemyBehaviour>();
         _nextMoveTile = VecCurrentPos() + _moveDir;
     }
 
@@ -51,6 +61,28 @@ public class EnemyMovement : MonoBehaviour
         MovePerTile();
     }
 
+    // Public
+    public Vector2Int VecCurrentPos()
+    {
+        var vecPos = Vector2.zero;
+        vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
+
+        // Error adjustment when moving left
+        if (_moveDir == Vector2.left)
+        {
+            //vecPos = new Vector2(Mathf.CeilToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+            vecPos.x = Mathf.CeilToInt(transform.position.x);
+        }
+        // Error adjustment when moving down
+        if (_moveDir == Vector2.down)
+        {
+            vecPos.y = Mathf.CeilToInt(transform.position.y);
+        }
+
+        return new Vector2Int((int)vecPos.x, (int)vecPos.y);
+    }
+
+    // Private
     private void MovePerTile()
     {
         if(VecCurrentPos() != _nextMoveTile)
@@ -251,25 +283,5 @@ public class EnemyMovement : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
-    }
-
-    private Vector2Int VecCurrentPos()
-    {
-        var vecPos = Vector2.zero;
-        vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
-
-        // Error adjustment when moving left
-        if (_moveDir == Vector2.left)
-        {
-            //vecPos = new Vector2(Mathf.CeilToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
-            vecPos.x = Mathf.CeilToInt(transform.position.x);
-        }
-        // Error adjustment when moving down
-        if(_moveDir == Vector2.down)
-        {
-            vecPos.y = Mathf.CeilToInt(transform.position.y);
-        }
-
-        return new Vector2Int((int)vecPos.x, (int)vecPos.y);
     }
 }

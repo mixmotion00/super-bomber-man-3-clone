@@ -30,12 +30,15 @@ public class WorldObject : MonoBehaviour
     [SerializeField] private SpriteRenderer srPrefab;
     [SerializeField] private ExplodeEvent _explodeEventPrefab;
     [SerializeField] private RewardItem _rewardItemPrefab;
+
     private List<DestructableTile> _destructableTiles = new List<DestructableTile>();
     private List<DestructableRewardItem> _destructableRewardItem = new List<DestructableRewardItem>();
     private List<BombBehaviour> _cacheBombs = new List<BombBehaviour>();
 
     public List<Vector2Int> AllTileBounds { get { return _allTileBounds; } }
     public List<BombBehaviour> CacheBombs { get { return _cacheBombs; } }
+
+    public List<IEnemyBehaviour> EnemyBehaviours { get; set; } = new List<IEnemyBehaviour>();
 
     public bool OnCollided(Vector2Int pos)
     {
@@ -47,6 +50,11 @@ public class WorldObject : MonoBehaviour
         if(destructableTile != null)
         {
             OnDestroyDestructable(destructableTile);
+        }
+
+        for (int i = 0; i < EnemyBehaviours.Count; i++)
+        {
+            EnemyBehaviours[i].OnHitExplosion(pos);
         }
 
         var desctructableReward = _destructableRewardItem.
