@@ -58,14 +58,14 @@ public class EnemyMovement : MonoBehaviour, IEnemyMovement
 
     private void Update()
     {
+        if (!_enemyBehaviour.IsAlive) return;
         MovePerTile();
     }
 
     // Public
     public Vector2Int VecCurrentPos()
     {
-        var vecPos = Vector2.zero;
-        vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
+        var vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
 
         // Error adjustment when moving left
         if (_moveDir == Vector2.left)

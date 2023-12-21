@@ -7,6 +7,7 @@ public class BombBehaviour : MonoBehaviour
 {
     ICharacterState _charState;
     [SerializeField] private BombExplosion _bombExplosionPrefab;
+    [SerializeField] private BoxCollider2D _boxCol2D;
     [SerializeField] private float _explosionPwr = 1.0f;
     [SerializeField] private float _animationDelay = 1.0f;
 
@@ -17,14 +18,6 @@ public class BombBehaviour : MonoBehaviour
 
     public void Init(Vector2 original, ref ICharacterState characterState)
     {
-        //WorldObject.Instance.AddBomb(this);
-
-        //Lets create all 4 directions
-        var up = new List<Vector2> { original + Vector2.up };
-        var down = new List<Vector2> { original + Vector2.down };
-        var left = new List<Vector2> { original + Vector2.left };
-        var right = new List<Vector2> { original + Vector2.right };
-
         _explosionPwr = characterState.ExplosionPower;
         _charState = characterState;
         _charState.BombCount--;
@@ -52,6 +45,22 @@ public class BombBehaviour : MonoBehaviour
             _charState.BombCount++;
             WorldObject.Instance.RemoveBomb(this);
             Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            _boxCol2D.isTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            _boxCol2D.isTrigger = false;
         }
     }
 }

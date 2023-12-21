@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bombExplosionPrefab: {fileID: 1111050714661404604, guid: 5dd5cc151a1714b79ae670771a78c45a, type: 3}
+  _boxCol2D: {fileID: 5420810938870280918}
   _explosionPwr: 1
   _animationDelay: 1
 --- !u!61 &5420810938870280918
