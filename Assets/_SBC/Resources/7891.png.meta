@@ -1389,7 +1389,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: die_
+      name: die_7
       rect:
         serializedVersion: 2
         x: 126
@@ -1464,13 +1464,13 @@ TextureImporter:
       7891_7: -1893239518
       7891_8: -1917152155
       7891_9: 460687325
-      die_: -1937602492
       die_1: -1101045697
       die_2: 1889680875
       die_3: -669029136
       die_4: -1151700983
       die_5: 1458088116
       die_6: -69168031
+      die_7: -1937602492
       e_walk_1: -1642161490
       e_walk_2: -2120384009
       e_walk_3: 873436722

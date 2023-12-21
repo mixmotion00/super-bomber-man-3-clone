@@ -43,12 +43,19 @@ namespace SBC
                     break;
             }
 
-            foreach (Animator anim in _animators)
+            if(animationType != AnimationType.Die)
             {
-                if (faceDir == FaceDir.West || faceDir == FaceDir.East)
-                    anim.Play($"{animStr}-Side");
+                foreach (Animator anim in _animators)
+                {
+                    if (faceDir == FaceDir.West || faceDir == FaceDir.East)
+                        anim.Play($"{animStr}-Side");
 
-                else anim.Play($"{animStr}-{faceDir}");
+                    else anim.Play($"{animStr}-{faceDir}");
+                }
+            }
+            else
+            {
+                _animators.ForEach(a => a.Play(animStr));
             }
         }
 

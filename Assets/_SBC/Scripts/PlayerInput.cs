@@ -21,6 +21,7 @@ namespace SBC
         {
             _charMovement = GetComponent<ICharacterMovement>();
             _charBombing = GetComponent<ICharacterBombing>();
+            _charState = GetComponent<ICharacterState>();
         }
 
         // Update is called once per frame
@@ -70,7 +71,8 @@ namespace SBC
 
         private void FixedUpdate()
         {
-            _charMovement.Move(_directionInput);
+            if(_charState.IsAlive)
+                _charMovement.Move(_directionInput);
             //if(_actionInput) 
             //{
             //    //Place bomb

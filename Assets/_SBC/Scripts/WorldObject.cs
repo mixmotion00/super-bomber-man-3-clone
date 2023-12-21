@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
+using SBC;
 
 public class DestructableTile
 {
@@ -38,6 +36,7 @@ public class WorldObject : MonoBehaviour
     public List<Vector2Int> AllTileBounds { get { return _allTileBounds; } }
     public List<BombBehaviour> CacheBombs { get { return _cacheBombs; } }
 
+    public List<ICharacterState> CharacterStates { get; set; } = new List<ICharacterState>();
     public List<IEnemyBehaviour> EnemyBehaviours { get; set; } = new List<IEnemyBehaviour>();
 
     public bool OnCollided(Vector2Int pos)
@@ -55,6 +54,11 @@ public class WorldObject : MonoBehaviour
         for (int i = 0; i < EnemyBehaviours.Count; i++)
         {
             EnemyBehaviours[i].OnHitExplosion(pos);
+        }
+
+        for (int i = 0; i < CharacterStates.Count; i++)
+        {
+            CharacterStates[i].OnHitExplosion(pos);
         }
 
         var desctructableReward = _destructableRewardItem.

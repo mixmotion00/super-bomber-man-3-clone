@@ -63,5 +63,6 @@ public class EnemyBehaviour : MonoBehaviour, IEnemyBehaviour
     public void OnDead()
     {
         _animator.Play(_dieAnimStr);
+        WorldObject.Instance.EnemyBehaviours.Remove(this);
     }
 }

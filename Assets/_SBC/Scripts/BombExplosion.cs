@@ -93,6 +93,9 @@ public class BombExplosion : MonoBehaviour
         var spreadPos = origin;
         //base
         InstantiateSpread(ref spreadPos, Vector2.zero, ExplosionSpriteFlag.Base);
+        var oriSpreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y);
+        WorldObject.Instance.OnCollided(oriSpreadPosInt);
+
         bool collided = false;
         //top
         for (int i = 0; i < _topSpread; i++)

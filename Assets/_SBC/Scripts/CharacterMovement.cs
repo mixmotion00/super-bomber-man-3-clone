@@ -9,7 +9,9 @@ namespace SBC
     {
         bool AnyMovement { get; }
         FaceDir HorizontalFaceDir { get; }
+        FaceDir AllFaceDir { get; }
         void Move(Vector2 direction);
+        //Vector2Int VecCurrentPos();
     }
 
     public enum FaceDir : int
@@ -41,6 +43,7 @@ namespace SBC
         }
 
         public FaceDir HorizontalFaceDir { get => _horizontalFaceDir; }
+        public FaceDir AllFaceDir { get => _allFaceDir; }
 
         // Start is called before the first frame update
         void Start()
@@ -105,5 +108,29 @@ namespace SBC
             //    _debugFaceDir.OnChangeDir(_allFaceDir);
                 //EventBusManager.Instance.EventBus.Emmit<IDebugFaceDir>(e => e.OnChangeDir(_faceDir));
         }
+
+        //public Vector2Int VecCurrentPos()
+        //{
+        //    var vecPos = new Vector2(Mathf.FloorToInt(transform.position.x), Mathf.FloorToInt(transform.position.y));
+
+        //    // Error adjustment when moving left
+        //    if (_allFaceDir == FaceDir.West || _allFaceDir == FaceDir.East)
+        //    {
+        //        //vecPos = new Vector2(Mathf.CeilToInt(transform.position.x), Mathf.RoundToInt(transform.position.y));
+        //        vecPos.x = Mathf.CeilToInt(transform.position.x);
+        //    }
+
+        //    // Error adjustment when moving down
+        //    if (_allFaceDir == FaceDir.South || _allFaceDir == FaceDir.North)
+        //    {
+        //        vecPos.y = Mathf.CeilToInt(transform.position.y);
+        //    }
+        //    if (_allFaceDir == FaceDir.North)
+        //    {
+        //        vecPos.y = Mathf.FloorToInt(transform.position.y);
+        //    }
+
+        //    return new Vector2Int((int)vecPos.x, (int)vecPos.y);
+        //}
     }
 }
