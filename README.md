@@ -1,6 +1,6 @@
 # Super Bomberman 3 Clone
 
-This project is a simple clone inspired by the retro SNES game **Super Bomberman 3**. The repository is created primarily for practice and serves as a showcase for the implementation of single responsibility code.
+This project is a simple clone inspired by the retro SNES game **Super Bomberman 3**. The repository is created primarily for practice and serves as a showcase for the implementation of design pattern.
 
 # Gameplay
 ![Super Bomberman 3 Clone Gameplay](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWtyeWlpbDJ4emFsNTd0b2FsYmJ1ZHI1Y2o2d3hsOGxjeGRiMXI3ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IWsqfu1yfLajgACmqn/giphy.gif)
