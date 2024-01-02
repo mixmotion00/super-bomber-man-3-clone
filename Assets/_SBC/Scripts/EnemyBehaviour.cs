@@ -7,6 +7,7 @@ public interface IEnemyBehaviour
     public int Health { get; }
     public bool IsAlive { get; }
     public void OnHitExplosion(Vector2Int explosionPos);
+    public IEnemyMovement EnemyMovement { get; }
 }
 
 public class EnemyBehaviour : MonoBehaviour, IEnemyBehaviour

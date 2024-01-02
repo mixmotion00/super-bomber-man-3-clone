@@ -29,6 +29,9 @@ public class EnemyMovement : MonoBehaviour, IEnemyMovement
     // Auto References
     private IEnemyBehaviour _enemyBehaviour;
 
+    // Debug
+    private bool _showDebug = false; // Only works for 1 enemy during test
+
     // Properties
     private List<Vector2Int> _allTilesBounds
     {
@@ -266,7 +269,8 @@ public class EnemyMovement : MonoBehaviour, IEnemyMovement
         if (!_allTilesBounds.Any(tile => newRoundPos == tile)) // if no tile found, just don't display debug
             return;
 
-        DebugCollided(check, color);
+        if(_showDebug)
+            DebugCollided(check, color);
     }
 
     private void DebugCollided(Vector2Int colliderPos, Color color)

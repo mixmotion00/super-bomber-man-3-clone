@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using SBC;
+using static UnityEditor.PlayerSettings;
 
 public class DestructableTile
 {
@@ -39,7 +39,7 @@ public class WorldObject : MonoBehaviour
     public List<ICharacterState> CharacterStates { get; set; } = new List<ICharacterState>();
     public List<IEnemyBehaviour> EnemyBehaviours { get; set; } = new List<IEnemyBehaviour>();
 
-    public bool OnCollided(Vector2Int pos)
+    public bool OnExplosionCollided(Vector2Int pos)
     {
         var anyTile = _allTileBounds.Any(t => t.x == pos.x && t.y == pos.y);
 
@@ -58,7 +58,7 @@ public class WorldObject : MonoBehaviour
 
         for (int i = 0; i < CharacterStates.Count; i++)
         {
-            CharacterStates[i].OnHitExplosion(pos);
+            CharacterStates[i].OnDangerContact(pos);
         }
 
         var desctructableReward = _destructableRewardItem.
@@ -132,6 +132,23 @@ public class WorldObject : MonoBehaviour
     private void Start()
     {
         GetAllTiles();
+    }
+
+    private void Update()
+    {
+        OnEnemyCollidedLoop();
+    }
+
+    private void OnEnemyCollidedLoop()
+    {
+        for (int i = 0; i < CharacterStates.Count; i++)
+        {
+            for (int j = 0; j < EnemyBehaviours.Count; j++)
+            {
+                //Debug.Log($"EnemyVecCurPos: {EnemyBehaviours[j].EnemyMovement.VecCurrentPos()}");
+                CharacterStates[i].OnDangerContact(EnemyBehaviours[j].EnemyMovement.VecCurrentPos());
+            }
+        }
     }
 
     private void OnDestroyDestructable(DestructableTile tile)

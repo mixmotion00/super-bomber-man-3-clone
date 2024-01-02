@@ -94,7 +94,7 @@ public class BombExplosion : MonoBehaviour
         //base
         InstantiateSpread(ref spreadPos, Vector2.zero, ExplosionSpriteFlag.Base);
         var oriSpreadPosInt = new Vector2Int((int)spreadPos.x, (int)spreadPos.y);
-        WorldObject.Instance.OnCollided(oriSpreadPosInt);
+        WorldObject.Instance.OnExplosionCollided(oriSpreadPosInt);
 
         bool collided = false;
         //top
@@ -114,7 +114,7 @@ public class BombExplosion : MonoBehaviour
                 WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromTop);
             }
 
-            if (WorldObject.Instance.OnCollided(spreadPosInt))
+            if (WorldObject.Instance.OnExplosionCollided(spreadPosInt))
             {
                 Debug.Log($"Collided top: {spreadPosInt}");
                 collided = true;
@@ -148,7 +148,7 @@ public class BombExplosion : MonoBehaviour
                 collided = true;
                 WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromBottom);
             }
-            if (WorldObject.Instance.OnCollided(spreadPosInt))
+            if (WorldObject.Instance.OnExplosionCollided(spreadPosInt))
             {
                 Debug.Log($"Collided down: {spreadPosInt}");
                 collided = true;
@@ -182,7 +182,7 @@ public class BombExplosion : MonoBehaviour
                 collided = true;
                 WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromLeft);
             }
-            if (WorldObject.Instance.OnCollided(spreadPosInt))
+            if (WorldObject.Instance.OnExplosionCollided(spreadPosInt))
             {
                 Debug.Log($"Collided left: {spreadPosInt}");
                 collided = true;
@@ -216,7 +216,7 @@ public class BombExplosion : MonoBehaviour
                 collided = true;
                 WorldObject.Instance.OnCollidedBomb(spreadPosInt, Vector2.zero).ChainExplode(ChainSourceFlag.FromRight);
             }
-            if (WorldObject.Instance.OnCollided(spreadPosInt))
+            if (WorldObject.Instance.OnExplosionCollided(spreadPosInt))
             {
                 Debug.Log($"Collided right: {spreadPosInt}");
                 collided = true;
