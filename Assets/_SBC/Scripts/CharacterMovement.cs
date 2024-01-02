@@ -33,6 +33,7 @@ namespace SBC
         //Interface references
         private ICharacterAnimation _characterAnimation;
         private ICharacterVisual _characterVisual;
+        private ICharacterState _characterState;
 
         public bool AnyMovement 
         {
@@ -50,11 +51,18 @@ namespace SBC
         {
             _characterAnimation = GetComponent<CharacterAnimation>();
             _characterVisual = GetComponent<CharacterVisual>();
+            _characterState = GetComponent<ICharacterState>();
             _rb = GetComponent<Rigidbody2D>();
         }
 
         public void Move(Vector2 direction) 
         {
+            if (!_characterState.IsAlive)
+            {
+                _moveSpeed = 0;
+                _rb.velocity = Vector2.zero;
+                return;
+            }
 
             direction.x = _moveSpeed * direction.x;
             direction.y = _moveSpeed * direction.y;

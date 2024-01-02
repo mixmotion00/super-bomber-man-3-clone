@@ -71,8 +71,7 @@ namespace SBC
 
         private void FixedUpdate()
         {
-            if(_charState.IsAlive)
-                _charMovement.Move(_directionInput);
+            _charMovement.Move(_directionInput);
             //if(_actionInput) 
             //{
             //    //Place bomb

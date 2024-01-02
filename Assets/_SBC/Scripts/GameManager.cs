@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +13,10 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            var player = Instantiate(_characterPrefab);
-            player.transform.position = _spawnPoint.position;
+            //var player = Instantiate(_characterPrefab);
+            //player.transform.position = _spawnPoint.position;
+
+            SceneManager.LoadScene(0);
         }
     }
 }
